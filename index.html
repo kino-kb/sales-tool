@@ -235,10 +235,10 @@ textarea{resize:vertical;min-height:72px;}
       <div id="panel-memo" style="display:none;" class="ss">
         <div class="st">議事録を追加</div>
         <label style="margin-top:0;">MTG日</label><input type="date" id="memo-date">
-        <label>議題・話した内容</label>
-        <textarea id="memo-body" placeholder="MTGで話した内容、決定事項、課題など..."></textarea>
-        <label>次回MTGに向けて</label>
-        <textarea id="memo-next" placeholder="次回確認事項、宿題など..."></textarea>
+        <label>GoogleドキュメントURL</label>
+        <input type="text" id="memo-url" placeholder="https://docs.google.com/document/...">
+        <label>メモ（任意）</label>
+        <textarea id="memo-body" placeholder="この回のMTGの概要など..." style="min-height:50px;"></textarea>
         <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="saveMemo()">保存</button>
         <div class="st" style="margin-top:16px;">過去の議事録</div>
         <div id="client-memo-list"></div>
@@ -557,18 +557,19 @@ async function saveNext(){
 
 // 議事録
 async function saveMemo(){
+  const doc_url=document.getElementById('memo-url').value.trim();
   const body=document.getElementById('memo-body').value.trim();
-  if(!body){showToast('内容を入力してください');return;}
+  if(!doc_url){showToast('GoogleドキュメントのURLを入力してください');return;}
   const c=clients[cidx];
   const {data,error}=await db.from('cs_memos').insert({
     client_id:c.id,company:c.name,
     date:document.getElementById('memo-date').value||todayStr,
-    body,next_content:document.getElementById('memo-next').value.trim()
+    body,doc_url
   }).select().single();
   if(error){showToast('エラー: '+error.message);return;}
   if(data)memos.unshift(data);
   document.getElementById('memo-body').value='';
-  document.getElementById('memo-next').value='';
+  document.getElementById('memo-url').value='';
   document.getElementById('memo-date').value='';
   showToast('議事録を保存しました');
   renderClientMemos();renderMemos();updateMemoFilter();updateMetrics();
@@ -580,9 +581,11 @@ function renderClientMemos(){
   const el=document.getElementById('client-memo-list');
   if(!cm.length){el.innerHTML='<p style="color:#888;font-size:13px;padding:8px 0;">まだ議事録がありません</p>';return;}
   el.innerHTML=cm.map(m=>`<div class="memo-item">
-    <div class="memo-header"><span class="memo-company">${fd(m.date)||m.date}</span></div>
-    <div class="memo-text">${m.body}</div>
-    ${m.next_content?`<div style="margin-top:8px;padding:8px;background:#fff8e1;border-radius:6px;font-size:12px;color:#666;"><b>次回に向けて：</b>${m.next_content}</div>`:''}
+    <div class="memo-header">
+      <span class="memo-company">${fd(m.date)||m.date||''}</span>
+      ${m.doc_url?`<a href="${m.doc_url}" target="_blank" class="btn btn-ghost btn-sm" style="font-size:11px;">📄 議事録を開く</a>`:''}
+    </div>
+    ${m.body?`<div class="memo-text" style="margin-top:4px;">${m.body}</div>`:''}
   </div>`).join('');
 }
 
@@ -592,9 +595,12 @@ function renderMemos(){
   const list=document.getElementById('memo-list');if(!list)return;
   if(!filtered.length){list.innerHTML='<p style="color:#888;font-size:13px;padding:12px 0;">まだ議事録がありません。</p>';return;}
   list.innerHTML=filtered.map(m=>`<div class="memo-item">
-    <div class="memo-header"><span class="memo-company">${m.company||''}</span><span class="memo-date">${fd(m.date)||m.date||''}</span></div>
-    <div class="memo-text">${(m.body||'').slice(0,150)}${(m.body||'').length>150?'...':''}</div>
-    ${m.next_content?`<div style="margin-top:6px;font-size:12px;color:#888;">次回: ${m.next_content.slice(0,80)}</div>`:''}
+    <div class="memo-header">
+      <span class="memo-company">${m.company||''}</span>
+      <span class="memo-date">${fd(m.date)||m.date||''}</span>
+    </div>
+    ${m.doc_url?`<a href="${m.doc_url}" target="_blank" class="url-link" style="font-size:12px;display:block;margin-top:4px;">📄 議事録を開く</a>`:''}
+    ${m.body?`<div class="memo-text" style="margin-top:4px;color:#888;">${m.body.slice(0,100)}${m.body.length>100?'...':''}</div>`:''}
   </div>`).join('');
 }
 
