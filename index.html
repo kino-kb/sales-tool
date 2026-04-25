@@ -481,13 +481,21 @@ function nbc(d){if(d===null)return 'dn';if(d<0)return 'np';if(d===0)return 'nt';
 function nl(d,dt){if(d===null)return '未設定';if(d<0)return`${Math.abs(d)}日超過 (${fd(dt)})`;if(d===0)return`今日 (${fd(dt)})`;if(d===1)return`明日 (${fd(dt)})`;return`${d}日後 (${fd(dt)})`;}
 
 async function callAI(prompt){
-  const res = await fetch(GEMINI_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({contents:[{parts:[{text: prompt}]}]})
-  });
-  const data = await res.json();
-  return data.candidates?.[0]?.content?.parts?.[0]?.text || '生成に失敗しました';
+  try {
+    const res = await fetch(GEMINI_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({contents:[{parts:[{text: prompt}]}],generationConfig:{temperature:0.7,maxOutputTokens:1500}})
+    });
+    if(!res.ok){
+      const err = await res.json();
+      return 'APIエラー: ' + (err.error?.message || res.status);
+    }
+    const data = await res.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || '生成に失敗しました';
+  } catch(e) {
+    return 'エラー: ' + e.message;
+  }
 }
 
 async function loadAll(){
@@ -549,7 +557,10 @@ function renderCustomers(){
       <div class="rt"><div class="av">${ini(c.name)}</div>
       <div class="ci"><div class="cn">${c.company||''}</div>
       <div class="cm"><span class="chip"><span class="av-sm">${ini(c.name)}</span>${c.name||''}${c.title?'・'+c.title:''}</span>${(Array.isArray(c.area)?c.area:(c.area?[c.area]:[])).map(a=>`<span class="area-b">${a}</span>`).join('')}</div></div>
-      <div class="rr"><span class="badge ${sbMap[c.status]||'b-info'}">${c.status||''}</span></div></div>
+      <div class="rr">
+        <span class="badge ${sbMap[c.status]||'b-info'}">${c.status||''}</span>
+        <div style="display:flex;gap:3px;margin-top:3px;justify-content:flex-end;">${(Array.isArray(c.members)?c.members:(c.members?[c.members]:[])).map(m=>'<span style="width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;" title="'+m+'">'+m[0]+'</span>').join('')}</div>
+      </div></div>
       <div class="rb">
         <span class="db ${lbc(ago)}">最終: ${ll(ago,c.last_contact)}</span>
         <span class="db ${nbc(diff)}">次回: ${nl(diff,c.next_action)}${c.next_memo?' — '+c.next_memo:''}</span>
