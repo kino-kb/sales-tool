@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>営業管理ツール</title>
+<title>CSコンサルツール</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#1a1a1a;}
-.app{max-width:900px;margin:0 auto;padding:1.5rem;}
-h1{font-size:20px;font-weight:600;margin-bottom:1.5rem;color:#1a1a1a;}
+.app{max-width:960px;margin:0 auto;padding:1.5rem;}
+h1{font-size:20px;font-weight:600;margin-bottom:1.5rem;}
 .tabs{display:flex;gap:4px;margin-bottom:1.5rem;border-bottom:1px solid #e0e0e0;}
 .tab{padding:8px 16px;font-size:13px;border:none;background:none;color:#666;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;}
 .tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500;}
@@ -36,48 +36,30 @@ textarea{resize:vertical;min-height:72px;}
 .b-success{background:#e8f5e9;color:#2e7d32;}
 .b-warning{background:#fff8e1;color:#f57f17;}
 .b-info{background:#e3f2fd;color:#1565c0;}
+.b-danger{background:#ffebee;color:#c62828;}
 .b-gray{background:#f5f5f5;color:#666;}
-.db{font-size:11px;padding:3px 8px;border-radius:99px;font-weight:500;white-space:nowrap;}
-.df{background:#e8f5e9;color:#2e7d32;}
-.dm{background:#fff8e1;color:#f57f17;}
-.do{background:#ffebee;color:#c62828;}
-.dn{background:#f5f5f5;color:#888;}
-.ns{background:#fff8e1;color:#f57f17;}
-.nt{background:#ffebee;color:#c62828;}
-.nf{background:#e3f2fd;color:#1565c0;}
-.np{background:#ffebee;color:#c62828;}
-.customer-row{padding:12px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;}
-.customer-row:last-child{border-bottom:none;}
-.customer-row:hover{background:#fafafa;margin:0 -1.25rem;padding:12px 1.25rem;border-radius:8px;}
+.b-purple{background:#f3e5f5;color:#6a1b9a;}
+.client-row{padding:12px 0;border-bottom:1px solid #f0f0f0;cursor:pointer;}
+.client-row:last-child{border-bottom:none;}
+.client-row:hover{background:#fafafa;margin:0 -1.25rem;padding:12px 1.25rem;border-radius:8px;}
 .rt{display:flex;align-items:center;gap:12px;}
 .rb{display:flex;gap:6px;margin-top:7px;padding-left:48px;flex-wrap:wrap;}
 .av{width:36px;height:36px;border-radius:50%;background:#e3f2fd;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#1565c0;flex-shrink:0;}
 .av-lg{width:48px;height:48px;font-size:16px;}
-.av-sm{width:22px;height:22px;border-radius:50%;background:#f5f5f5;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#666;flex-shrink:0;border:1px solid #e0e0e0;}
 .ci{flex:1;min-width:0;}
 .cn{font-size:14px;font-weight:600;}
 .cm{font-size:12px;color:#888;margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .rr{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
-.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#666;background:#f5f5f5;border-radius:99px;padding:2px 8px 2px 4px;}
-.area-b{font-size:11px;padding:3px 8px;border-radius:99px;background:#f5f5f5;color:#666;}
-.sort-bar,.filter-bar{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
-.sort-bar span,.filter-bar span{font-size:12px;color:#888;}
-.fp{font-size:12px;padding:4px 10px;border-radius:99px;cursor:pointer;border:1px solid #e0e0e0;background:none;color:#666;font-family:inherit;}
-.fp.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
 .add-form{display:none;margin-top:12px;border-top:1px solid #f0f0f0;padding-top:12px;}
 .add-form.open{display:block;}
 .fr{display:flex;gap:8px;margin-top:10px;}
 .fr>div{flex:1;min-width:0;}
-.spin{display:inline-block;width:14px;height:14px;border:2px solid #ddd;border-top-color:#1a1a1a;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.aio{background:#f9f9f9;border-radius:8px;padding:1rem;font-size:14px;line-height:1.7;color:#1a1a1a;white-space:pre-wrap;border:1px solid #e8e8e8;}
 .dp{display:none;}.dp.open{display:block;}
 .back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:#888;cursor:pointer;background:none;border:none;font-family:inherit;margin-bottom:16px;padding:0;}
 .back-btn:hover{color:#1a1a1a;}
 .dh{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
 .dn-txt{font-size:18px;font-weight:600;}
-.ds{font-size:13px;color:#888;margin-top:2px;}
-.ag{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:20px;}
+.ag{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:20px;}
 .ab{padding:10px 8px;border-radius:10px;font-size:12px;cursor:pointer;font-family:inherit;border:1px solid #e0e0e0;background:#fff;color:#1a1a1a;text-align:center;font-weight:500;}
 .ab:hover{background:#f5f5f5;}
 .ab.on{border-color:#1a1a1a;background:#f5f5f5;}
@@ -86,141 +68,161 @@ textarea{resize:vertical;min-height:72px;}
 .ii{background:#f9f9f9;border-radius:8px;padding:10px 12px;}
 .il{font-size:11px;color:#888;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em;}
 .iv{font-size:13px;font-weight:500;}
-.pp-wrap{display:flex;gap:6px;flex-wrap:wrap;}
-.pp{font-size:12px;padding:5px 12px;border-radius:99px;cursor:pointer;border:1px solid #e0e0e0;background:#f5f5f5;color:#666;font-family:inherit;}
-.pp.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;font-weight:500;}
 .ss{margin-top:18px;}
 .st{font-size:11px;color:#888;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;}
 .es{background:#f9f9f9;border-radius:12px;padding:1rem 1.25rem;margin-top:12px;border:1px solid #e8e8e8;}
-.pl-board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.pl-col{background:#f9f9f9;border-radius:10px;padding:10px;}
-.pl-hd{font-size:11px;font-weight:600;color:#888;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;}
-.pl-card{background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:10px;margin-bottom:8px;font-size:13px;cursor:pointer;}
-.pl-card:hover{border-color:#999;}
-.pl-name{font-weight:600;margin-bottom:3px;}
-.pl-amt{color:#888;font-size:12px;}
-.memo-item{padding:10px 0;border-bottom:1px solid #f0f0f0;}
-.memo-item:last-child{border-bottom:none;}
-.memo-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
-.memo-company{font-size:13px;font-weight:600;}
-.memo-date{font-size:11px;color:#888;white-space:nowrap;}
-.memo-text{font-size:13px;color:#666;margin-top:4px;line-height:1.6;}
-.memo-tags{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;}
 .checklist{list-style:none;padding:0;}
 .checklist li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px;}
 .checklist li:last-child{border-bottom:none;}
 .checklist li.done{color:#aaa;text-decoration:line-through;}
 .check-circle{width:18px;height:18px;border-radius:50%;border:1.5px solid #ccc;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;background:none;}
 .check-circle.checked{background:#1a1a1a;border-color:#1a1a1a;color:#fff;}
+.check-circle.our{border-color:#1565c0;}
+.check-circle.our.checked{background:#1565c0;border-color:#1565c0;}
+.task-owner{font-size:10px;padding:2px 6px;border-radius:99px;font-weight:500;white-space:nowrap;flex-shrink:0;}
+.task-our{background:#e3f2fd;color:#1565c0;}
+.task-their{background:#f3e5f5;color:#6a1b9a;}
+.memo-item{padding:12px 0;border-bottom:1px solid #f0f0f0;}
+.memo-item:last-child{border-bottom:none;}
+.memo-header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+.memo-company{font-size:13px;font-weight:600;}
+.memo-date{font-size:11px;color:#888;white-space:nowrap;}
+.memo-text{font-size:13px;color:#444;line-height:1.7;white-space:pre-wrap;}
+.contact-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;}
+.contact-item:last-child{border-bottom:none;}
+.contact-av{width:28px;height:28px;border-radius:50%;background:#f3e5f5;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#6a1b9a;flex-shrink:0;}
+.progress-bar{height:6px;background:#e0e0e0;border-radius:99px;overflow:hidden;margin-top:4px;}
+.progress-fill{height:100%;background:#1a1a1a;border-radius:99px;transition:width .3s;}
+.pp-wrap{display:flex;gap:6px;flex-wrap:wrap;}
+.pp{font-size:12px;padding:5px 12px;border-radius:99px;cursor:pointer;border:1px solid #e0e0e0;background:#f5f5f5;color:#666;font-family:inherit;}
+.pp.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a;font-weight:500;}
 .loading{display:flex;align-items:center;justify-content:center;padding:3rem;color:#888;font-size:14px;}
 .toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;z-index:1000;opacity:0;transition:opacity .3s;}
 .toast.show{opacity:1;}
-.area-picker-wrap{position:relative;}
-.area-picker-btn{width:100%;text-align:left;padding:8px 10px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;font-size:14px;font-family:inherit;cursor:pointer;}
-.area-picker-btn:focus{outline:none;border-color:#666;}
-.area-dropdown{display:none;position:absolute;z-index:200;background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px;width:320px;box-shadow:0 4px 20px rgba(0,0,0,.1);max-height:320px;overflow-y:auto;}
-.area-dropdown.open{display:block;}
-.area-region{margin-bottom:8px;}
-.area-region-name{font-size:11px;color:#888;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px;}
-.area-prefs{display:flex;flex-wrap:wrap;gap:4px;}
-.area-pref{font-size:12px;padding:3px 8px;border-radius:99px;cursor:pointer;border:1px solid #e0e0e0;background:#f5f5f5;color:#666;font-family:inherit;}
-.area-pref.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
-.area-selected-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
-.area-tag{font-size:11px;padding:2px 8px;border-radius:99px;background:#e3f2fd;color:#1565c0;display:inline-flex;align-items:center;gap:4px;}
-.area-tag span{cursor:pointer;font-weight:600;}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #ddd;border-top-color:#1a1a1a;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.aio{background:#f9f9f9;border-radius:8px;padding:1rem;font-size:14px;line-height:1.7;white-space:pre-wrap;border:1px solid #e8e8e8;}
+.url-link{color:#1565c0;text-decoration:underline;font-size:13px;word-break:break-all;}
 .member-sel{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
-.member-btn{font-size:12px;padding:5px 12px;border-radius:99px;cursor:pointer;border:1px solid #e0e0e0;background:#f5f5f5;color:#666;font-family:inherit;display:flex;align-items:center;gap:5px;}
+.member-btn{font-size:12px;padding:5px 12px;border-radius:99px;cursor:pointer;border:1px solid #e0e0e0;background:#f5f5f5;color:#666;font-family:inherit;}
 .member-btn.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a;}
-.member-av-mini{width:20px;height:20px;border-radius:50%;background:#e3f2fd;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#1565c0;}
+.sort-bar{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.sort-bar span{font-size:12px;color:#888;}
 </style>
 </head>
 <body>
 <div class="app">
-  <h1>営業管理ツール</h1>
+  <h1>CSコンサルツール</h1>
   <div class="metrics">
-    <div class="metric"><div class="metric-label">顧客数</div><div class="metric-value" id="m-c">-</div></div>
-    <div class="metric"><div class="metric-label">進行中案件</div><div class="metric-value" id="m-d">-</div></div>
-    <div class="metric"><div class="metric-label">未完了タスク</div><div class="metric-value" id="m-t">-</div></div>
+    <div class="metric"><div class="metric-label">企業数</div><div class="metric-value" id="m-c">-</div></div>
+    <div class="metric"><div class="metric-label">弊社ボール</div><div class="metric-value" id="m-our">-</div></div>
+    <div class="metric"><div class="metric-label">相手ボール</div><div class="metric-value" id="m-their">-</div></div>
     <div class="metric"><div class="metric-label">議事録数</div><div class="metric-value" id="m-m">-</div></div>
   </div>
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('customers')">顧客管理</button>
-    <button class="tab" onclick="switchTab('pipeline')">商談進捗</button>
-    <button class="tab" onclick="switchTab('post')">商談後業務</button>
-    <button class="tab" onclick="switchTab('memos')">議事録</button>
-    <button class="tab" onclick="switchTab('script')">スクリプト</button>
+    <button class="tab active" onclick="switchTab('clients')">企業管理</button>
+    <button class="tab" onclick="switchTab('tasks')">タスク一覧</button>
+    <button class="tab" onclick="switchTab('memos')">議事録一覧</button>
   </div>
 
-  <div class="section active" id="tab-customers">
+  <!-- 企業管理 -->
+  <div class="section active" id="tab-clients">
     <div id="clv">
       <div class="card">
         <div class="card-header">
-          <span class="card-title">顧客リスト</span>
+          <span class="card-title">企業リスト</span>
           <button class="btn btn-ghost btn-sm" onclick="toggleAdd()">+ 追加</button>
         </div>
         <div class="sort-bar">
           <span>並び順：</span>
-          <button class="btn btn-ghost btn-sm" onclick="setSort('next')" id="s-next">ネクストアクション</button>
-          <button class="btn btn-ghost btn-sm" onclick="setSort('approach')" id="s-approach">最終アプローチ</button>
+          <button class="btn btn-ghost btn-sm" onclick="setSort('next')" id="s-next">次回MTG</button>
           <button class="btn btn-ghost btn-sm" onclick="setSort('name')" id="s-name">名前順</button>
         </div>
-        <div class="filter-bar" id="area-bar" style="display:none;"><span>エリア：</span></div>
         <div id="clist"><div class="loading">読み込み中...</div></div>
         <div class="add-form" id="add-form">
-          <div class="fr"><div><label>会社名</label><input type="text" id="n-co" placeholder="株式会社〇〇"></div><div><label>エリア（複数選択可）</label><div class="area-picker-wrap"><button type="button" class="area-picker-btn" onclick="toggleAreaPicker('n-area-drop')" id="n-area-btn">選択してください</button><div class="area-dropdown" id="n-area-drop"></div></div><div class="area-selected-tags" id="n-area-tags"></div></div></div>
-          <div class="fr"><div><label>担当者名</label><input type="text" id="n-nm" placeholder="田中 太郎"></div><div><label>役職</label><input type="text" id="n-ti" placeholder="営業部長"></div></div>
-          <div class="fr"><div><label>メール</label><input type="text" id="n-em" placeholder="tanaka@example.com"></div><div><label>電話</label><input type="tel" id="n-ph" placeholder="03-1234-5678"></div></div>
-          <div class="fr"><div><label>ステータス</label><select id="n-st"><option>リード</option><option>提案中</option><option>交渉中</option><option>成約</option></select></div><div><label>最終アプローチ日</label><input type="date" id="n-lc"></div></div>
-          <div class="fr"><div><label>ネクストアクション日</label><input type="date" id="n-na"></div><div><label>ネクストアクション内容</label><input type="text" id="n-nm2" placeholder="例：提案書送付"></div></div>
+          <div class="fr">
+            <div><label>企業名</label><input type="text" id="n-co" placeholder="株式会社〇〇"></div>
+            <div><label>ステータス</label>
+              <select id="n-st">
+                <option>進行中</option><option>完了</option><option>保留</option><option>解約</option>
+              </select>
+            </div>
+          </div>
+          <div class="fr">
+            <div><label>次回MTG日</label><input type="date" id="n-na"></div>
+            <div><label>次回MTG内容</label><input type="text" id="n-nm" placeholder="例：月次レビュー"></div>
+          </div>
+          <div><label>スプレッドシートURL</label><input type="text" id="n-url" placeholder="https://docs.google.com/spreadsheets/..."></div>
           <div style="margin-top:10px;"><label>担当営業メンバー</label><div class="member-sel" id="n-member-sel"></div></div>
-          <button class="btn btn-primary" style="margin-top:12px;" onclick="addCustomer()">保存</button>
+          <button class="btn btn-primary" style="margin-top:12px;" onclick="addClient()">保存</button>
         </div>
       </div>
     </div>
 
+    <!-- 企業詳細 -->
     <div class="dp" id="detail">
-      <button class="back-btn" onclick="closeDetail()">← 顧客リストに戻る</button>
+      <button class="back-btn" onclick="closeDetail()">← 企業リストに戻る</button>
       <div class="dh">
         <div class="av av-lg" id="d-av"></div>
         <div style="flex:1;min-width:0;">
           <div class="dn-txt" id="d-co"></div>
-          <div class="ds" id="d-pe"></div>
           <div style="margin-top:5px;display:flex;gap:6px;flex-wrap:wrap;" id="d-badges"></div>
         </div>
         <div style="display:flex;gap:6px;">
           <button class="btn btn-ghost btn-sm" onclick="toggleEdit()" id="edit-btn">編集</button>
-          <button class="btn btn-danger btn-sm" onclick="delCustomer()">削除</button>
+          <button class="btn btn-danger btn-sm" onclick="delClient()">削除</button>
         </div>
       </div>
+
+      <!-- クイックアクション -->
       <div class="ag">
-        <div class="ab" id="ab-memo" onclick="togglePanel('memo')"><span class="ic">📝</span>商談メモ</div>
-        <div class="ab" id="ab-post" onclick="togglePanel('post')"><span class="ic">✅</span>商談後タスク</div>
-        
-        <div class="ab" id="ab-script" onclick="togglePanel('script')"><span class="ic">💬</span>スクリプト</div>
-        <div class="ab" onclick="markApproach()"><span class="ic">✓</span>アプローチ済み</div>
-        <div class="ab" id="ab-next" onclick="togglePanel('next')"><span class="ic">📅</span>次回アクション</div>
+        <div class="ab" id="ab-memo" onclick="togglePanel('memo')"><span class="ic">📝</span>議事録追加</div>
+        <div class="ab" id="ab-task" onclick="togglePanel('task')"><span class="ic">✅</span>タスク管理</div>
+        <div class="ab" id="ab-contact" onclick="togglePanel('contact')"><span class="ic">👤</span>担当者管理</div>
+        <div class="ab" id="ab-next" onclick="togglePanel('next')"><span class="ic">📅</span>次回MTG設定</div>
       </div>
+
+      <!-- 基本情報 -->
       <div id="view-info">
         <div class="ig">
-          <div class="ii"><div class="il">メール</div><div class="iv" id="d-em" style="font-size:12px;"></div><button class="btn btn-ghost btn-sm" style="margin-top:6px;font-size:11px;" onclick="openMailDirect()">メールを開く</button></div>
-          <div class="ii"><div class="il">電話</div><div class="iv" id="d-ph"></div></div>
-          <div class="ii"><div class="il">エリア</div><div class="iv" id="d-ar"></div></div>
           <div class="ii"><div class="il">ステータス</div><div class="iv" id="d-st"></div></div>
-          <div class="ii"><div class="il">最終アプローチ</div><div class="iv" id="d-lc"></div></div>
-          <div class="ii"><div class="il">ネクストアクション</div><div class="iv" id="d-na"></div></div>
-          <div class="ii" style="grid-column:span 2;"><div class="il">担当営業メンバー</div><div class="iv" id="d-mb"></div></div>
+          <div class="ii"><div class="il">次回MTG</div><div class="iv" id="d-na"></div></div>
+          <div class="ii"><div class="il">次回MTG内容</div><div class="iv" id="d-nm"></div></div>
+          <div class="ii"><div class="il">担当メンバー</div><div class="iv" id="d-mb"></div></div>
         </div>
-        <div class="ii" id="d-nm-box" style="margin-bottom:12px;"><div class="il">ネクストアクション内容</div><div class="iv" id="d-nm"></div></div>
-        <div class="ss"><div class="st">ステータス変更</div><div class="pp-wrap" id="d-pp"></div></div>
+        <div class="ii" style="margin-bottom:12px;" id="d-url-box">
+          <div class="il">スプレッドシート</div>
+          <div class="iv"><a id="d-url" class="url-link" href="#" target="_blank"></a></div>
+        </div>
+        <div class="ss">
+          <div class="st">進捗ステータス</div>
+          <div class="pp-wrap" id="d-pp"></div>
+        </div>
+        <div class="ss">
+          <div class="st">タスク進捗</div>
+          <div style="display:flex;gap:16px;font-size:12px;color:#666;margin-bottom:6px;">
+            <span>🔵 弊社ボール: <span id="d-our-count">0</span>件</span>
+            <span>🟣 相手ボール: <span id="d-their-count">0</span>件</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="d-progress" style="width:0%"></div></div>
+        </div>
       </div>
+
+      <!-- 編集モード -->
       <div id="edit-info" style="display:none;">
         <div class="es">
           <div class="st" style="margin-bottom:12px;">基本情報を編集</div>
-          <div class="fr"><div><label>会社名</label><input type="text" id="e-co"></div><div><label>エリア（複数選択可）</label><div class="area-picker-wrap"><button type="button" class="area-picker-btn" onclick="toggleAreaPicker('e-area-drop')" id="e-area-btn">選択してください</button><div class="area-dropdown" id="e-area-drop"></div></div><div class="area-selected-tags" id="e-area-tags"></div></div></div>
-          <div class="fr"><div><label>担当者名</label><input type="text" id="e-nm"></div><div><label>役職</label><input type="text" id="e-ti"></div></div>
-          <div class="fr"><div><label>メール</label><input type="text" id="e-em"></div><div><label>電話</label><input type="tel" id="e-ph"></div></div>
-          <div class="fr"><div><label>ステータス</label><select id="e-st"><option>リード</option><option>提案中</option><option>交渉中</option><option>成約</option></select></div><div><label>最終アプローチ日</label><input type="date" id="e-lc"></div></div>
-          <div class="fr"><div><label>ネクストアクション日</label><input type="date" id="e-na"></div><div><label>ネクストアクション内容</label><input type="text" id="e-nm2"></div></div>
+          <div class="fr">
+            <div><label>企業名</label><input type="text" id="e-co"></div>
+            <div><label>ステータス</label>
+              <select id="e-st"><option>進行中</option><option>完了</option><option>保留</option><option>解約</option></select>
+            </div>
+          </div>
+          <div class="fr">
+            <div><label>次回MTG日</label><input type="date" id="e-na"></div>
+            <div><label>次回MTG内容</label><input type="text" id="e-nm"></div>
+          </div>
+          <div><label>スプレッドシートURL</label><input type="text" id="e-url"></div>
           <div style="margin-top:10px;"><label>担当営業メンバー</label><div class="member-sel" id="e-member-sel"></div></div>
           <div style="display:flex;gap:8px;margin-top:12px;">
             <button class="btn btn-primary" onclick="saveEdit()">保存</button>
@@ -228,88 +230,95 @@ textarea{resize:vertical;min-height:72px;}
           </div>
         </div>
       </div>
+
+      <!-- 議事録パネル -->
       <div id="panel-memo" style="display:none;" class="ss">
-        <div class="st">商談メモを記録</div>
-        <label style="margin-top:0;">商談日</label><input type="date" id="memo-date">
-        <label>メモ内容</label><textarea id="memo-body" placeholder="商談で話した内容、顧客の反応、懸念点など..."></textarea>
-        <label>タグ</label>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;" id="memo-tags-sel">
-          <button class="fp" onclick="toggleTag(this,'ヒアリング')">ヒアリング</button>
-          <button class="fp" onclick="toggleTag(this,'提案')">提案</button>
-          <button class="fp" onclick="toggleTag(this,'懸念あり')">懸念あり</button>
-          <button class="fp" onclick="toggleTag(this,'前向き')">前向き</button>
-          <button class="fp" onclick="toggleTag(this,'要フォロー')">要フォロー</button>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:12px;">
-          <button class="btn btn-ghost btn-sm" onclick="aiSummarizeMemo()">AIで整形 ↗</button>
-          <button class="btn btn-primary btn-sm" onclick="saveMemo()">保存</button>
-        </div>
-        <div id="memo-ai-out" style="display:none;margin-top:10px;"><div class="aio" id="memo-ai-txt"></div></div>
+        <div class="st">議事録を追加</div>
+        <label style="margin-top:0;">MTG日</label><input type="date" id="memo-date">
+        <label>議題・話した内容</label>
+        <textarea id="memo-body" placeholder="MTGで話した内容、決定事項、課題など..."></textarea>
+        <label>次回MTGに向けて</label>
+        <textarea id="memo-next" placeholder="次回確認事項、宿題など..."></textarea>
+        <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="saveMemo()">保存</button>
+        <div class="st" style="margin-top:16px;">過去の議事録</div>
+        <div id="client-memo-list"></div>
       </div>
-      <div id="panel-post" style="display:none;" class="ss">
-        <div class="st">商談後タスク</div>
-        <ul class="checklist" id="post-list"></ul>
-        <div style="display:flex;gap:8px;margin-top:10px;">
-          <input type="text" id="new-task" placeholder="タスクを追加...">
+
+      <!-- タスクパネル -->
+      <div id="panel-task" style="display:none;" class="ss">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div class="st" style="margin-bottom:0;">タスク管理</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <span class="badge task-our">🔵 弊社ボール</span>
+          <span class="badge task-their">🟣 相手ボール</span>
+        </div>
+        <ul class="checklist" id="task-list"></ul>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+          <input type="text" id="new-task" placeholder="タスクを追加..." style="flex:1;min-width:150px;">
+          <select id="new-task-owner" style="width:auto;">
+            <option value="our">弊社ボール</option>
+            <option value="their">相手ボール</option>
+          </select>
           <button class="btn btn-primary btn-sm" onclick="addTask()">追加</button>
         </div>
       </div>
+
+      <!-- 担当者パネル -->
+      <div id="panel-contact" style="display:none;" class="ss">
+        <div class="st">担当者一覧</div>
+        <div id="contact-list"></div>
+        <div style="margin-top:12px;background:#f9f9f9;border-radius:8px;padding:12px;border:1px solid #e8e8e8;">
+          <div class="st" style="margin-bottom:8px;">担当者を追加</div>
+          <div class="fr">
+            <div><label style="margin-top:0;">氏名</label><input type="text" id="new-contact-name" placeholder="田中 太郎"></div>
+            <div><label style="margin-top:0;">役職</label><input type="text" id="new-contact-title" placeholder="部長"></div>
+          </div>
+          <div class="fr">
+            <div><label>メール</label><input type="text" id="new-contact-email" placeholder="tanaka@example.com"></div>
+            <div><label>電話</label><input type="tel" id="new-contact-phone" placeholder="03-1234-5678"></div>
+          </div>
+          <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="addContact()">追加</button>
+        </div>
+      </div>
+
+      <!-- 次回MTGパネル -->
       <div id="panel-next" style="display:none;" class="ss">
-        <div class="st">ネクストアクション設定</div>
+        <div class="st">次回MTG設定</div>
         <div class="fr">
           <div><label>日付</label><input type="date" id="p-next-date"></div>
-          <div><label>内容</label><input type="text" id="p-next-memo" placeholder="例：デモ実施"></div>
+          <div><label>内容</label><input type="text" id="p-next-memo" placeholder="例：月次レビュー"></div>
         </div>
         <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="saveNext()">保存</button>
       </div>
-      <div id="panel-script" style="display:none;" class="ss">
-        <div class="st">AIスクリプト生成</div>
-        <label style="margin-top:0;">商品・サービス名</label>
-        <input type="text" id="p-sc-prod" placeholder="例：クラウド型CRMシステム">
-        <label>シーン</label>
-        <select id="p-sc-scene"><option>初回電話</option><option>アポイント取り</option><option>製品デモ</option><option>価格交渉</option><option>反論への対応</option><option>クロージング</option></select>
-        <label>懸念点（任意）</label>
-        <input type="text" id="p-sc-obj" placeholder="例：コストが高い">
-        <button class="btn btn-primary" style="margin-top:10px;width:100%;" onclick="genScript()">生成する ↗</button>
-        <div id="p-sc-out" style="display:none;margin-top:12px;"><div class="aio" id="p-sc-txt"></div></div>
-      </div>
     </div>
   </div>
 
-  <div class="section" id="tab-pipeline">
-    <div class="pl-board" id="pl-board"><div class="loading">読み込み中...</div></div>
-  </div>
-
-  <div class="section" id="tab-post">
+  <!-- タスク一覧 -->
+  <div class="section" id="tab-tasks">
     <div class="card">
       <div class="card-header">
-        <span class="card-title">商談後タスク一覧</span>
-        <span class="badge b-gray" id="post-count"></span>
+        <span class="card-title">全タスク一覧</span>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-ghost btn-sm" onclick="setTaskFilter('all')" id="tf-all">すべて</button>
+          <button class="btn btn-ghost btn-sm" onclick="setTaskFilter('our')" id="tf-our">🔵 弊社</button>
+          <button class="btn btn-ghost btn-sm" onclick="setTaskFilter('their')" id="tf-their">🟣 相手</button>
+        </div>
       </div>
-      <div id="post-board"><div class="loading">読み込み中...</div></div>
+      <div id="task-board"><div class="loading">読み込み中...</div></div>
     </div>
   </div>
 
+  <!-- 議事録一覧 -->
   <div class="section" id="tab-memos">
     <div class="card">
       <div class="card-header">
-        <span class="card-title">商談議事録</span>
-        <select id="memo-filter" style="width:auto;font-size:13px;" onchange="renderMemos()"><option value="">全顧客</option></select>
+        <span class="card-title">議事録一覧</span>
+        <select id="memo-filter" style="width:auto;font-size:13px;" onchange="renderMemos()">
+          <option value="">全企業</option>
+        </select>
       </div>
       <div id="memo-list"><div class="loading">読み込み中...</div></div>
-    </div>
-  </div>
-
-  <div class="section" id="tab-script">
-    <div class="card">
-      <div class="card-title" style="margin-bottom:12px;">AIトークスクリプト生成</div>
-      <label>商品・サービス名</label><input type="text" id="sc-prod" placeholder="例：クラウド型CRMシステム">
-      <label>想定顧客</label><input type="text" id="sc-target" placeholder="例：中小企業の営業部長">
-      <label>シーン</label>
-      <select id="sc-scene"><option>初回電話</option><option>アポイント取り</option><option>製品デモ</option><option>価格交渉</option><option>反論への対応</option><option>クロージング</option></select>
-      <label>懸念点（任意）</label><input type="text" id="sc-obj" placeholder="例：コストが高い">
-      <button class="btn btn-primary" style="margin-top:12px;width:100%;" onclick="genScriptTab()">AIでスクリプト生成 ↗</button>
-      <div id="sc-out" style="margin-top:12px;display:none;"><div class="aio" id="sc-txt"></div></div>
     </div>
   </div>
 </div>
@@ -319,247 +328,115 @@ textarea{resize:vertical;min-height:72px;}
 <script>
 const SUPABASE_URL = 'https://zmvcigfeehmgjpszypve.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_2po5tVFpz44rEtjUavP0lg_SKJNd8Kb';
-const GEMINI_KEY = 'AIzaSyDijC64e7uGFpKKlsD0w1xj51HDv5wu8EM';
-const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + GEMINI_KEY;
-
-const MEMBERS = ['木野','久世','石田','内藤','遠藤'];
-const memberSelections = {n: [], e: []};
-
-function buildMemberSel(elId, prefix){
-  const el = document.getElementById(elId);
-  el.innerHTML = MEMBERS.map(m=>`<button type="button" class="member-btn ${memberSelections[prefix].includes(m)?'on':''}" onclick="toggleMember('${prefix}','${m}',this)"><span class="member-av-mini">${m[0]}</span>${m}</button>`).join('');
-}
-
-function toggleMember(prefix, name, btn){
-  const sel = memberSelections[prefix];
-  const idx = sel.indexOf(name);
-  if(idx>=0){sel.splice(idx,1);btn.classList.remove('on');}
-  else{sel.push(name);btn.classList.add('on');}
-}
-
-function resetMemberSel(prefix){
-  memberSelections[prefix]=[];
-  const elId = prefix===('n')?'n-member-sel':'e-member-sel';
-  buildMemberSel(elId, prefix);
-}
-
-function initMemberSel(prefix, members){
-  memberSelections[prefix] = members ? (Array.isArray(members)?[...members]:[members]) : [];
-  buildMemberSel(prefix===('n')?'n-member-sel':'e-member-sel', prefix);
-}
-const PREFS = [
-  {region:'北海道・東北',prefs:['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県']},
-  {region:'関東',prefs:['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県']},
-  {region:'中部',prefs:['新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県']},
-  {region:'近畿',prefs:['三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県']},
-  {region:'中国・四国',prefs:['鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県']},
-  {region:'九州・沖縄',prefs:['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']},
-  {region:'海外',prefs:['海外']}
-];
-
-// エリア選択状態管理
-const areaSelections = {n: [], e: []};
-
-function buildAreaDropdown(dropId, prefix){
-  const drop = document.getElementById(dropId);
-  drop.innerHTML = PREFS.map(g=>`
-    <div class="area-region">
-      <div class="area-region-name">${g.region}</div>
-      <div class="area-prefs">${g.prefs.map(p=>`<button type="button" class="area-pref" onclick="toggleAreaPref('${prefix}','${p}',this)">${p}</button>`).join('')}</div>
-    </div>`).join('');
-}
-
-function toggleAreaPicker(dropId){
-  const drop = document.getElementById(dropId);
-  const prefix = dropId.startsWith('n') ? 'n' : 'e';
-  if(!drop.innerHTML) buildAreaDropdown(dropId, prefix);
-  drop.classList.toggle('open');
-  // 他のドロップダウンを閉じる
-  document.querySelectorAll('.area-dropdown').forEach(d=>{if(d.id!==dropId)d.classList.remove('open');});
-}
-
-function toggleAreaPref(prefix, pref, btn){
-  const sel = areaSelections[prefix];
-  const idx = sel.indexOf(pref);
-  if(idx>=0){sel.splice(idx,1);btn.classList.remove('on');}
-  else{sel.push(pref);btn.classList.add('on');}
-  renderAreaTags(prefix);
-  updateAreaBtn(prefix);
-}
-
-function renderAreaTags(prefix){
-  const tagsEl = document.getElementById(prefix+'-area-tags');
-  tagsEl.innerHTML = areaSelections[prefix].map(p=>`<span class="area-tag">${p}<span onclick="removeAreaPref('${prefix}','${p}')">×</span></span>`).join('');
-}
-
-function removeAreaPref(prefix, pref){
-  const sel = areaSelections[prefix];
-  const idx = sel.indexOf(pref);
-  if(idx>=0) sel.splice(idx,1);
-  renderAreaTags(prefix);
-  updateAreaBtn(prefix);
-  // ボタンのon状態も更新
-  const dropId = prefix+'-area-drop';
-  const drop = document.getElementById(dropId);
-  drop.querySelectorAll('.area-pref').forEach(b=>{if(b.textContent===pref)b.classList.remove('on');});
-}
-
-function updateAreaBtn(prefix){
-  const btn = document.getElementById(prefix+'-area-btn');
-  const sel = areaSelections[prefix];
-  btn.textContent = sel.length ? sel.join('、') : '選択してください';
-}
-
-function setAreaSelection(prefix, areas){
-  areaSelections[prefix] = areas ? [...areas] : [];
-  renderAreaTags(prefix);
-  updateAreaBtn(prefix);
-}
-
-function resetAreaPicker(prefix){
-  areaSelections[prefix] = [];
-  renderAreaTags(prefix);
-  updateAreaBtn(prefix);
-  const dropId = prefix+'-area-drop';
-  const drop = document.getElementById(dropId);
-  drop.querySelectorAll('.area-pref').forEach(b=>b.classList.remove('on'));
-  drop.classList.remove('open');
-}
-
-function initEditAreaPicker(areas){
-  const prefix = 'e';
-  areaSelections[prefix] = areas ? (Array.isArray(areas)?[...areas]:[areas]) : [];
-  const dropId = 'e-area-drop';
-  const drop = document.getElementById(dropId);
-  if(drop.innerHTML) {
-    drop.querySelectorAll('.area-pref').forEach(b=>{
-      b.classList.toggle('on', areaSelections[prefix].includes(b.textContent));
-    });
-  }
-  renderAreaTags(prefix);
-  updateAreaBtn(prefix);
-}
-
-// クリック外でドロップダウンを閉じる
-document.addEventListener('click', e=>{
-  if(!e.target.closest('.area-picker-wrap')) {
-    document.querySelectorAll('.area-dropdown').forEach(d=>d.classList.remove('open'));
-  }
-});
-
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const MEMBERS = ['木野','久世','石田','内藤','遠藤'];
+const memberSelections = {n:[], e:[]};
 const todayStr = new Date().toISOString().split('T')[0];
 const today = new Date(todayStr);
-const dft = d => d ? Math.floor((new Date(d) - today) / 86400000) : null;
-const dago = d => d ? Math.floor((today - new Date(d)) / 86400000) : null;
-const fd = d => { if (!d) return null; const dt = new Date(d); return `${dt.getMonth()+1}/${dt.getDate()}`; };
-const ini = n => n ? n.split(' ').map(x => x[0]).join('').slice(0,2).toUpperCase() : '??';
-const sbMap = {'リード':'b-info','提案中':'b-warning','交渉中':'b-warning','成約':'b-success'};
-const defaultTasks = ['フォローアップメールを送信','議事録を記録・共有','見積書・提案書の作成','社内報告書の記入','ネクストアクションの日程確定','CRMへの案件登録'];
+const dft = d => d ? Math.floor((new Date(d)-today)/86400000) : null;
+const fd = d => { if(!d) return null; const dt=new Date(d); return `${dt.getFullYear()}/${dt.getMonth()+1}/${dt.getDate()}`; };
+const ini = n => n ? n.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase() : '??';
 
-let customers=[], tasks=[], memos=[], selectedTags=[], cidx=null, sortOrder='next', areaFilter='all', editMode=false;
+const sbMap = {'進行中':'b-info','完了':'b-success','保留':'b-warning','解約':'b-danger'};
+
+let clients=[], tasks=[], memos=[], contacts=[];
+let cidx=null, sortOrder='next', editMode=false, taskFilter='all';
 
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-function lbc(d){if(d===null)return 'dn';if(d<=7)return 'df';if(d<=21)return 'dm';return 'do';}
-function ll(d,dt){if(d===null)return '未アプローチ';if(d===0)return '今日';if(d===1)return '昨日';return`${d}日前 (${fd(dt)})`;}
-function nbc(d){if(d===null)return 'dn';if(d<0)return 'np';if(d===0)return 'nt';if(d<=3)return 'ns';return 'nf';}
-function nl(d,dt){if(d===null)return '未設定';if(d<0)return`${Math.abs(d)}日超過 (${fd(dt)})`;if(d===0)return`今日 (${fd(dt)})`;if(d===1)return`明日 (${fd(dt)})`;return`${d}日後 (${fd(dt)})`;}
+function nlabel(d,dt){if(d===null)return '未設定';if(d<0)return`${Math.abs(d)}日超過`;if(d===0)return`今日 (${fd(dt)})`;if(d===1)return`明日 (${fd(dt)})`;return`${d}日後 (${fd(dt)})`;}
+function nbc(d){if(d===null)return 'b-gray';if(d<0)return 'b-danger';if(d<=3)return 'b-warning';return 'b-info';}
 
-async function callAI(prompt){
-  try {
-    const res = await fetch(GEMINI_URL, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({contents:[{parts:[{text: prompt}]}],generationConfig:{temperature:0.7,maxOutputTokens:1500}})
-    });
-    if(!res.ok){
-      const err = await res.json();
-      return 'APIエラー: ' + (err.error?.message || res.status);
-    }
-    const data = await res.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || '生成に失敗しました';
-  } catch(e) {
-    return 'エラー: ' + e.message;
-  }
+// メンバー
+function buildMemberSel(elId, prefix){
+  const el=document.getElementById(elId);
+  if(!el) return;
+  el.innerHTML=MEMBERS.map(m=>`<button type="button" class="member-btn ${memberSelections[prefix].includes(m)?'on':''}" onclick="toggleMember('${prefix}','${m}',this)">${m}</button>`).join('');
 }
+function toggleMember(prefix,name,btn){
+  const sel=memberSelections[prefix];
+  const idx=sel.indexOf(name);
+  if(idx>=0){sel.splice(idx,1);btn.classList.remove('on');}
+  else{sel.push(name);btn.classList.add('on');}
+}
+function initMemberSel(prefix,members){
+  memberSelections[prefix]=members?(Array.isArray(members)?[...members]:[members]):[];
+  buildMemberSel(prefix==='n'?'n-member-sel':'e-member-sel',prefix);
+}
+function resetMemberSel(prefix){memberSelections[prefix]=[];buildMemberSel(prefix==='n'?'n-member-sel':'e-member-sel',prefix);}
 
+// データ読み込み
 async function loadAll(){
-  const [cRes,tRes,mRes] = await Promise.all([
-    db.from('customers').select('*').order('created_at',{ascending:false}),
-    db.from('tasks').select('*').order('created_at',{ascending:true}),
-    db.from('memos').select('*').order('created_at',{ascending:false})
+  const [cRes,tRes,mRes,ctRes]=await Promise.all([
+    db.from('cs_clients').select('*').order('created_at',{ascending:false}),
+    db.from('cs_tasks').select('*').order('created_at',{ascending:true}),
+    db.from('cs_memos').select('*').order('date',{ascending:false}),
+    db.from('cs_contacts').select('*').order('created_at',{ascending:true})
   ]);
-  customers=cRes.data||[]; tasks=tRes.data||[]; memos=mRes.data||[];
-  renderCustomers(); renderPipeline(); renderPostBoard(); renderMemos(); updateMemoFilter(); updateMetrics();
+  clients=cRes.data||[]; tasks=tRes.data||[]; memos=mRes.data||[]; contacts=ctRes.data||[];
+  renderClients(); renderTaskBoard(); renderMemos(); updateMemoFilter(); updateMetrics();
 }
 
 function updateMetrics(){
-  document.getElementById('m-c').textContent=customers.length;
-  document.getElementById('m-d').textContent=customers.filter(c=>c.status!=='成約').length;
-  document.getElementById('m-t').textContent=tasks.filter(t=>!t.done).length;
+  document.getElementById('m-c').textContent=clients.length;
+  const ourPending=tasks.filter(t=>t.owner==='our'&&!t.done).length;
+  const theirPending=tasks.filter(t=>t.owner==='their'&&!t.done).length;
+  document.getElementById('m-our').textContent=ourPending;
+  document.getElementById('m-their').textContent=theirPending;
   document.getElementById('m-m').textContent=memos.length;
 }
 
-function getAreas(){
-  const all = customers.flatMap(c=>Array.isArray(c.area)?c.area:(c.area?[c.area]:[]));
-  return [...new Set(all)].sort();
-}
-function renderAreaFilter(){
-  const bar=document.getElementById('area-bar');
-  const areas=getAreas();
-  if(!areas.length){bar.style.display='none';return;}
-  bar.style.display='flex';
-  bar.innerHTML='<span>エリア：</span>'+`<button class="fp ${areaFilter==='all'?'active':''}" onclick="setArea('all')">すべて</button>`+areas.map(a=>`<button class="fp ${areaFilter===a?'active':''}" onclick="setArea('${a}')">${a}</button>`).join('');
-}
-function setArea(a){areaFilter=a;renderAreaFilter();renderCustomers();}
-
 function setSort(o){
   sortOrder=o;
-  ['next','approach','name'].forEach(x=>{
+  ['next','name'].forEach(x=>{
     const el=document.getElementById('s-'+x);if(!el)return;
-    el.style.background=x===o?'#1a1a1a':'';el.style.color=x===o?'#fff':'';el.style.borderColor=x===o?'#1a1a1a':'';
+    el.style.background=x===o?'#1a1a1a':'';
+    el.style.color=x===o?'#fff':'';
+    el.style.borderColor=x===o?'#1a1a1a':'';
   });
-  renderCustomers();
+  renderClients();
 }
 
-function sortedCustomers(){
-  let list=customers.filter(c=>{
-    if(areaFilter==='all') return true;
-    const a = Array.isArray(c.area)?c.area:(c.area?[c.area]:[]);
-    return a.includes(areaFilter);
-  });
-  if(sortOrder==='next')return list.sort((a,b)=>{if(!a.next_action&&!b.next_action)return 0;if(!a.next_action)return 1;if(!b.next_action)return-1;return new Date(a.next_action)-new Date(b.next_action);});
-  if(sortOrder==='approach')return list.sort((a,b)=>{if(!a.last_contact&&!b.last_contact)return 0;if(!a.last_contact)return 1;if(!b.last_contact)return-1;return new Date(b.last_contact)-new Date(a.last_contact);});
+function sortedClients(){
+  let list=[...clients];
+  if(sortOrder==='next')return list.sort((a,b)=>{if(!a.next_mtg&&!b.next_mtg)return 0;if(!a.next_mtg)return 1;if(!b.next_mtg)return -1;return new Date(a.next_mtg)-new Date(b.next_mtg);});
   return list.sort((a,b)=>(a.name||'').localeCompare(b.name||'','ja'));
 }
 
-function renderCustomers(){
-  const sorted=sortedCustomers();
-  const pending=cid=>tasks.filter(t=>t.customer_id===cid&&!t.done).length;
+function renderClients(){
+  const sorted=sortedClients();
+  const ourCount=cid=>tasks.filter(t=>t.client_id===cid&&t.owner==='our'&&!t.done).length;
+  const theirCount=cid=>tasks.filter(t=>t.client_id===cid&&t.owner==='their'&&!t.done).length;
   document.getElementById('clist').innerHTML=sorted.length?sorted.map(c=>{
-    const ago=dago(c.last_contact),diff=dft(c.next_action);
-    return`<div class="customer-row" onclick="openDetail('${c.id}')">
-      <div class="rt"><div class="av">${ini(c.name)}</div>
-      <div class="ci"><div class="cn">${c.company||''}</div>
-      <div class="cm"><span class="chip"><span class="av-sm">${ini(c.name)}</span>${c.name||''}${c.title?'・'+c.title:''}</span>${(Array.isArray(c.area)?c.area:(c.area?[c.area]:[])).map(a=>`<span class="area-b">${a}</span>`).join('')}</div></div>
-      <div class="rr">
-        <span class="badge ${sbMap[c.status]||'b-info'}">${c.status||''}</span>
-        <div style="display:flex;gap:3px;margin-top:3px;justify-content:flex-end;">${(Array.isArray(c.members)?c.members:(c.members?[c.members]:[])).map(m=>'<span style="width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;" title="'+m+'">'+m[0]+'</span>').join('')}</div>
-      </div></div>
+    const diff=dft(c.next_mtg);
+    const mbrs=Array.isArray(c.members)?c.members:(c.members?[c.members]:[]);
+    return`<div class="client-row" onclick="openDetail('${c.id}')">
+      <div class="rt">
+        <div class="av">${ini(c.name)}</div>
+        <div class="ci">
+          <div class="cn">${c.name||''}</div>
+          <div class="cm">${mbrs.map(m=>`<span style="font-size:11px;background:#f5f5f5;border-radius:99px;padding:2px 7px;">${m}</span>`).join('')}</div>
+        </div>
+        <div class="rr">
+          <span class="badge ${sbMap[c.status]||'b-gray'}">${c.status||''}</span>
+          ${mbrs.map(m=>`<span style="width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;">${m[0]}</span>`).join('')}
+        </div>
+      </div>
       <div class="rb">
-        <span class="db ${lbc(ago)}">最終: ${ll(ago,c.last_contact)}</span>
-        <span class="db ${nbc(diff)}">次回: ${nl(diff,c.next_action)}${c.next_memo?' — '+c.next_memo:''}</span>
-        ${pending(c.id)?`<span class="badge b-warning">${pending(c.id)}件未完了</span>`:''}
-      </div></div>`;
-  }).join(''):'<p style="color:#888;font-size:13px;padding:12px 0;">顧客がまだいません。「+ 追加」から登録してください。</p>';
-  updateMetrics(); renderAreaFilter();
+        <span class="badge ${nbc(diff)}">次回MTG: ${nlabel(diff,c.next_mtg)}${c.next_mtg_memo?' — '+c.next_mtg_memo:''}</span>
+        ${ourCount(c.id)?`<span class="badge task-our">🔵 弊社${ourCount(c.id)}件</span>`:''}
+        ${theirCount(c.id)?`<span class="badge task-their">🟣 相手${theirCount(c.id)}件</span>`:''}
+      </div>
+    </div>`;
+  }).join(''):'<p style="color:#888;font-size:13px;padding:12px 0;">企業がまだいません。「+ 追加」から登録してください。</p>';
+  updateMetrics();
 }
 
 function openDetail(id){
-  const i=customers.findIndex(c=>c.id===id);if(i<0)return;
+  const i=clients.findIndex(c=>c.id===id);
+  if(i<0)return;
   cidx=i;editMode=false;
   document.getElementById('clv').style.display='none';
   document.getElementById('detail').className='dp open';
@@ -567,35 +444,47 @@ function openDetail(id){
 }
 
 function refreshDetail(){
-  const c=customers[cidx];
+  const c=clients[cidx];
   document.getElementById('d-av').textContent=ini(c.name);
-  document.getElementById('d-co').textContent=c.company||'';
-  document.getElementById('d-pe').textContent=`${c.name||''}${c.title?'・'+c.title:''}`;
-  document.getElementById('d-badges').innerHTML=`<span class="badge ${sbMap[c.status]||'b-info'}">${c.status||''}</span>`+(Array.isArray(c.area)?c.area:(c.area?[c.area]:[])).map(a=>`<span class="area-b">${a}</span>`).join('');
-  document.getElementById('d-em').textContent=c.email||'—';
-  document.getElementById('d-ph').textContent=c.phone||'—';
-  document.getElementById('d-ar').textContent=(Array.isArray(c.area)?c.area:(c.area?[c.area]:[])).join('、')||'—';
+  document.getElementById('d-co').textContent=c.name||'';
+  document.getElementById('d-badges').innerHTML=`<span class="badge ${sbMap[c.status]||'b-gray'}">${c.status||''}</span>`;
   document.getElementById('d-st').textContent=c.status||'—';
-  const ago=dago(c.last_contact),diff=dft(c.next_action);
-  document.getElementById('d-lc').innerHTML=`<span class="db ${lbc(ago)}">${ll(ago,c.last_contact)}</span>`;
-  document.getElementById('d-na').innerHTML=`<span class="db ${nbc(diff)}">${nl(diff,c.next_action)}</span>`;
-  document.getElementById('d-nm-box').style.display=c.next_memo?'block':'none';
-  document.getElementById('d-nm').textContent=c.next_memo||'';
-  const mbrs = Array.isArray(c.members)?c.members:(c.members?[c.members]:[]);
-  document.getElementById('d-mb').innerHTML = mbrs.length ? mbrs.map(m=>`<span class="member-btn on" style="display:inline-flex;margin-right:4px;"><span class="member-av-mini">${m[0]}</span>${m}</span>`).join('') : '—';
-  document.getElementById('d-pp').innerHTML=['リード','提案中','交渉中','成約'].map(s=>`<button class="pp ${c.status===s?'active':''}" onclick="chgStatus('${c.id}','${s}')">${s}</button>`).join('');
+  const diff=dft(c.next_mtg);
+  document.getElementById('d-na').innerHTML=`<span class="badge ${nbc(diff)}">${nlabel(diff,c.next_mtg)}</span>`;
+  document.getElementById('d-nm').textContent=c.next_mtg_memo||'—';
+  const mbrs=Array.isArray(c.members)?c.members:(c.members?[c.members]:[]);
+  document.getElementById('d-mb').textContent=mbrs.join('、')||'—';
+  const urlBox=document.getElementById('d-url-box');
+  const urlEl=document.getElementById('d-url');
+  if(c.sheet_url){urlBox.style.display='block';urlEl.href=c.sheet_url;urlEl.textContent=c.sheet_url;}
+  else{urlBox.style.display='none';}
+  document.getElementById('d-pp').innerHTML=['進行中','完了','保留','解約'].map(s=>
+    `<button class="pp ${c.status===s?'active':''}" onclick="chgStatus('${c.id}','${s}')">${s}</button>`
+  ).join('');
   document.getElementById('view-info').style.display='block';
   document.getElementById('edit-info').style.display='none';
   document.getElementById('edit-btn').textContent='編集';
-  ['memo','post','next','email','script'].forEach(p=>{
+  ['memo','task','contact','next'].forEach(p=>{
     document.getElementById('panel-'+p).style.display='none';
     const ab=document.getElementById('ab-'+p);if(ab)ab.classList.remove('on');
   });
-  renderPostPanel();
+  updateTaskProgress(c.id);
+}
+
+function updateTaskProgress(cid){
+  const ctasks=tasks.filter(t=>t.client_id===cid);
+  const ourPending=ctasks.filter(t=>t.owner==='our'&&!t.done).length;
+  const theirPending=ctasks.filter(t=>t.owner==='their'&&!t.done).length;
+  const total=ctasks.length;
+  const done=ctasks.filter(t=>t.done).length;
+  document.getElementById('d-our-count').textContent=ourPending;
+  document.getElementById('d-their-count').textContent=theirPending;
+  const pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('d-progress').style.width=pct+'%';
 }
 
 function togglePanel(p){
-  const panels=['memo','post','next','email','script'];
+  const panels=['memo','task','contact','next'];
   panels.forEach(x=>{
     const el=document.getElementById('panel-'+x);
     const ab=document.getElementById('ab-'+x);
@@ -603,138 +492,98 @@ function togglePanel(p){
       const isOpen=el.style.display!=='none';
       el.style.display=isOpen?'none':'block';
       if(ab)ab.classList.toggle('on',!isOpen);
-      if(!isOpen&&p==='next'){const c=customers[cidx];document.getElementById('p-next-date').value=c.next_action||'';document.getElementById('p-next-memo').value=c.next_memo||'';}
+      if(!isOpen){
+        if(p==='next'){const c=clients[cidx];document.getElementById('p-next-date').value=c.next_mtg||'';document.getElementById('p-next-memo').value=c.next_mtg_memo||'';}
+        if(p==='task')renderTaskPanel();
+        if(p==='contact')renderContactPanel();
+        if(p==='memo')renderClientMemos();
+      }
     }else{el.style.display='none';if(ab)ab.classList.remove('on');}
   });
 }
 
 function toggleEdit(){
   editMode=!editMode;
-  const c=customers[cidx];
+  const c=clients[cidx];
   if(editMode){
     document.getElementById('view-info').style.display='none';
     document.getElementById('edit-info').style.display='block';
     document.getElementById('edit-btn').textContent='キャンセル';
-    document.getElementById('e-co').value=c.company||'';
-    initEditAreaPicker(c.area);
-    initMemberSel('e', c.members);
-    document.getElementById('e-nm').value=c.name||'';document.getElementById('e-ti').value=c.title||'';
-    document.getElementById('e-em').value=c.email||'';document.getElementById('e-ph').value=c.phone||'';
-    document.getElementById('e-st').value=c.status||'リード';document.getElementById('e-lc').value=c.last_contact||'';
-    document.getElementById('e-na').value=c.next_action||'';document.getElementById('e-nm2').value=c.next_memo||'';
+    document.getElementById('e-co').value=c.name||'';
+    document.getElementById('e-st').value=c.status||'進行中';
+    document.getElementById('e-na').value=c.next_mtg||'';
+    document.getElementById('e-nm').value=c.next_mtg_memo||'';
+    document.getElementById('e-url').value=c.sheet_url||'';
+    initMemberSel('e',c.members);
   }else{refreshDetail();}
 }
 
 async function saveEdit(){
-  const c=customers[cidx];
-  const updates={company:document.getElementById('e-co').value.trim(),area:areaSelections['e'].length?areaSelections['e']:null,name:document.getElementById('e-nm').value.trim(),title:document.getElementById('e-ti').value.trim(),email:document.getElementById('e-em').value.trim(),phone:document.getElementById('e-ph').value.trim(),status:document.getElementById('e-st').value,last_contact:document.getElementById('e-lc').value||null,next_action:document.getElementById('e-na').value||null,next_memo:document.getElementById('e-nm2').value.trim(),members:memberSelections['e'].length?memberSelections['e']:null};
-  const {error}=await db.from('customers').update(updates).eq('id',c.id);
+  const c=clients[cidx];
+  const updates={name:document.getElementById('e-co').value.trim(),status:document.getElementById('e-st').value,next_mtg:document.getElementById('e-na').value||null,next_mtg_memo:document.getElementById('e-nm').value.trim(),sheet_url:document.getElementById('e-url').value.trim(),members:memberSelections['e'].length?memberSelections['e']:null};
+  const {error}=await db.from('cs_clients').update(updates).eq('id',c.id);
   if(error){showToast('保存エラー: '+error.message);return;}
-  Object.assign(customers[cidx],updates);editMode=false;refreshDetail();renderCustomers();showToast('保存しました');
+  Object.assign(clients[cidx],updates);editMode=false;refreshDetail();renderClients();showToast('保存しました');
 }
 
-async function delCustomer(){
-  if(!confirm(`「${customers[cidx].company}」を削除しますか？`))return;
-  const id=customers[cidx].id;
-  await db.from('customers').delete().eq('id',id);
-  customers.splice(cidx,1);closeDetail();showToast('削除しました');
+async function delClient(){
+  if(!confirm(`「${clients[cidx].name}」を削除しますか？`))return;
+  const id=clients[cidx].id;
+  await db.from('cs_clients').delete().eq('id',id);
+  clients.splice(cidx,1);closeDetail();showToast('削除しました');
 }
 
 function closeDetail(){
   cidx=null;editMode=false;
   document.getElementById('clv').style.display='block';
   document.getElementById('detail').className='dp';
-  renderCustomers();
+  renderClients();
 }
 
 async function chgStatus(id,status){
-  await db.from('customers').update({status}).eq('id',id);
-  const c=customers.find(x=>x.id===id);if(c)c.status=status;
+  await db.from('cs_clients').update({status}).eq('id',id);
+  const c=clients.find(x=>x.id===id);if(c)c.status=status;
   refreshDetail();showToast('ステータス更新');
 }
 
-async function markApproach(){
-  const c=customers[cidx];
-  await db.from('customers').update({last_contact:todayStr}).eq('id',c.id);
-  c.last_contact=todayStr;refreshDetail();showToast('アプローチ済みにしました');
-}
-
 async function saveNext(){
-  const c=customers[cidx];
-  const next_action=document.getElementById('p-next-date').value||null;
-  const next_memo=document.getElementById('p-next-memo').value.trim();
-  await db.from('customers').update({next_action,next_memo}).eq('id',c.id);
-  c.next_action=next_action;c.next_memo=next_memo;refreshDetail();showToast('ネクストアクション設定しました');
+  const c=clients[cidx];
+  const next_mtg=document.getElementById('p-next-date').value||null;
+  const next_mtg_memo=document.getElementById('p-next-memo').value.trim();
+  await db.from('cs_clients').update({next_mtg,next_mtg_memo}).eq('id',c.id);
+  c.next_mtg=next_mtg;c.next_mtg_memo=next_mtg_memo;
+  refreshDetail();showToast('次回MTGを設定しました');
 }
 
-function renderPostPanel(){
-  const c=customers[cidx];
-  const ctasks=tasks.filter(t=>t.customer_id===c.id);
-  if(!ctasks.length){
-    Promise.all(defaultTasks.map(text=>db.from('tasks').insert({customer_id:c.id,text,done:false}).select().single())).then(results=>{results.forEach(r=>{if(r.data)tasks.push(r.data);});renderPostPanel();});
-    return;
-  }
-  document.getElementById('post-list').innerHTML=ctasks.map(t=>`<li class="${t.done?'done':''}"><div class="check-circle ${t.done?'checked':''}" onclick="toggleTask('${t.id}','${!t.done}')">${t.done?'✓':''}</div><span style="flex:1;">${t.text}</span></li>`).join('');
-  updateMetrics();renderPostBoard();
-}
-
-async function toggleTask(id,done){
-  const isDone=done==='true';
-  await db.from('tasks').update({done:isDone}).eq('id',id);
-  const t=tasks.find(x=>x.id===id);if(t)t.done=isDone;renderPostPanel();
-}
-
-async function addTask(){
-  const text=document.getElementById('new-task').value.trim();if(!text)return;
-  const c=customers[cidx];
-  const {data}=await db.from('tasks').insert({customer_id:c.id,text,done:false}).select().single();
-  if(data)tasks.push(data);document.getElementById('new-task').value='';renderPostPanel();
-}
-
-function renderPostBoard(){
-  const board=document.getElementById('post-board');if(!board)return;
-  const grouped={};
-  customers.forEach(c=>{const ctasks=tasks.filter(t=>t.customer_id===c.id);if(ctasks.length)grouped[c.id]={company:c.company,tasks:ctasks};});
-  if(!Object.keys(grouped).length){board.innerHTML='<p style="color:#888;font-size:13px;padding:12px 0;">顧客詳細からタスクを追加してください</p>';return;}
-  board.innerHTML=Object.values(grouped).map(g=>`<div style="margin-bottom:16px;"><div style="font-size:13px;font-weight:600;margin-bottom:8px;">${g.company}</div><ul class="checklist">${g.tasks.map(t=>`<li class="${t.done?'done':''}"><div class="check-circle ${t.done?'checked':''}" onclick="toggleTaskGlobal('${t.id}','${!t.done}')">${t.done?'✓':''}</div><span style="flex:1;">${t.text}</span><span class="badge ${t.done?'b-success':'b-warning'}">${t.done?'完了':'未完了'}</span></li>`).join('')}</ul></div>`).join('');
-  const total=tasks.length,done=tasks.filter(t=>t.done).length;
-  const el=document.getElementById('post-count');if(el)el.textContent=`${done}/${total}件完了`;
-}
-
-async function toggleTaskGlobal(id,done){
-  const isDone=done==='true';
-  await db.from('tasks').update({done:isDone}).eq('id',id);
-  const t=tasks.find(x=>x.id===id);if(t)t.done=isDone;renderPostBoard();updateMetrics();renderCustomers();
-}
-
-function toggleTag(btn,tag){
-  btn.classList.toggle('active');
-  if(btn.classList.contains('active')){if(!selectedTags.includes(tag))selectedTags.push(tag);}
-  else{selectedTags=selectedTags.filter(t=>t!==tag);}
-}
-
+// 議事録
 async function saveMemo(){
   const body=document.getElementById('memo-body').value.trim();
-  if(!body){showToast('メモを入力してください');return;}
-  const c=customers[cidx];
-  const {data}=await db.from('memos').insert({customer_id:c.id,company:c.company,date:document.getElementById('memo-date').value||todayStr,body,tags:selectedTags}).select().single();
+  if(!body){showToast('内容を入力してください');return;}
+  const c=clients[cidx];
+  const {data,error}=await db.from('cs_memos').insert({
+    client_id:c.id,company:c.name,
+    date:document.getElementById('memo-date').value||todayStr,
+    body,next_content:document.getElementById('memo-next').value.trim()
+  }).select().single();
+  if(error){showToast('エラー: '+error.message);return;}
   if(data)memos.unshift(data);
-  document.getElementById('memo-body').value='';document.getElementById('memo-date').value='';
-  selectedTags=[];document.querySelectorAll('#memo-tags-sel .fp').forEach(b=>b.classList.remove('active'));
-  document.getElementById('memo-ai-out').style.display='none';
-  showToast('議事録を保存しました');renderMemos();updateMemoFilter();updateMetrics();
+  document.getElementById('memo-body').value='';
+  document.getElementById('memo-next').value='';
+  document.getElementById('memo-date').value='';
+  showToast('議事録を保存しました');
+  renderClientMemos();renderMemos();updateMemoFilter();updateMetrics();
 }
 
-async function aiSummarizeMemo(){
-  const raw=document.getElementById('memo-body').value.trim();
-  if(!raw){showToast('メモを入力してください');return;}
-  const btn=event.target;btn.disabled=true;btn.innerHTML='<span class="spin"></span>整形中...';
-  document.getElementById('memo-ai-out').style.display='block';
-  document.getElementById('memo-ai-txt').textContent='整形中...';
-  try{
-    document.getElementById('memo-ai-txt').textContent=await callAI(`以下の商談メモを議事録として整形してください。\n\n${raw}\n\n形式：\n【概要】\n【顧客の反応・ニーズ】\n【懸念点】\n【合意事項】\n【ネクストアクション】`);
-  }catch(e){document.getElementById('memo-ai-txt').textContent='エラーが発生しました。';}
-  btn.disabled=false;btn.innerHTML='AIで整形 ↗';
+function renderClientMemos(){
+  const c=clients[cidx];
+  const cm=memos.filter(m=>m.client_id===c.id);
+  const el=document.getElementById('client-memo-list');
+  if(!cm.length){el.innerHTML='<p style="color:#888;font-size:13px;padding:8px 0;">まだ議事録がありません</p>';return;}
+  el.innerHTML=cm.map(m=>`<div class="memo-item">
+    <div class="memo-header"><span class="memo-company">${fd(m.date)||m.date}</span></div>
+    <div class="memo-text">${m.body}</div>
+    ${m.next_content?`<div style="margin-top:8px;padding:8px;background:#fff8e1;border-radius:6px;font-size:12px;color:#666;"><b>次回に向けて：</b>${m.next_content}</div>`:''}
+  </div>`).join('');
 }
 
 function renderMemos(){
@@ -742,109 +591,167 @@ function renderMemos(){
   const filtered=filter?memos.filter(m=>m.company===filter):memos;
   const list=document.getElementById('memo-list');if(!list)return;
   if(!filtered.length){list.innerHTML='<p style="color:#888;font-size:13px;padding:12px 0;">まだ議事録がありません。</p>';return;}
-  list.innerHTML=filtered.map(m=>`<div class="memo-item"><div class="memo-header"><span class="memo-company">${m.company||''}</span><span class="memo-date">${fd(m.date)||m.date||''}</span></div><div class="memo-text">${(m.body||'').slice(0,120)}${(m.body||'').length>120?'...':''}</div>${m.tags&&m.tags.length?`<div class="memo-tags">${m.tags.map(t=>`<span class="badge b-gray">${t}</span>`).join('')}</div>`:''}</div>`).join('');
+  list.innerHTML=filtered.map(m=>`<div class="memo-item">
+    <div class="memo-header"><span class="memo-company">${m.company||''}</span><span class="memo-date">${fd(m.date)||m.date||''}</span></div>
+    <div class="memo-text">${(m.body||'').slice(0,150)}${(m.body||'').length>150?'...':''}</div>
+    ${m.next_content?`<div style="margin-top:6px;font-size:12px;color:#888;">次回: ${m.next_content.slice(0,80)}</div>`:''}
+  </div>`).join('');
 }
 
 function updateMemoFilter(){
   const sel=document.getElementById('memo-filter');if(!sel)return;
   const companies=[...new Set(memos.map(m=>m.company).filter(Boolean))];
-  sel.innerHTML='<option value="">全顧客</option>'+companies.map(c=>`<option>${c}</option>`).join('');
+  sel.innerHTML='<option value="">全企業</option>'+companies.map(c=>`<option>${c}</option>`).join('');
 }
 
-function renderPipeline(){
-  const stages=['アプローチ','提案','交渉','成約'];
-  const stageMap={'リード':'アプローチ','提案中':'提案','交渉中':'交渉','成約':'成約'};
-  document.getElementById('pl-board').innerHTML=stages.map(s=>{
-    const sc=customers.filter(c=>stageMap[c.status]===s);
-    return`<div class="pl-col"><div class="pl-hd">${s} (${sc.length})</div>${sc.map(c=>`<div class="pl-card" onclick="openDetail('${c.id}')"><div class="pl-name">${c.company||''}</div><div class="pl-amt">${c.name||''}${c.title?'・'+c.title:''}</div></div>`).join('')}</div>`;
-  }).join('');
+// タスク
+function renderTaskPanel(){
+  const c=clients[cidx];
+  const ctasks=tasks.filter(t=>t.client_id===c.id);
+  document.getElementById('task-list').innerHTML=ctasks.map(t=>`
+    <li class="${t.done?'done':''}">
+      <div class="check-circle ${t.owner==='our'?'our':''} ${t.done?'checked':''}" onclick="toggleTask('${t.id}',${!t.done})">${t.done?'✓':''}</div>
+      <span style="flex:1;">${t.text}</span>
+      <span class="task-owner ${t.owner==='our'?'task-our':'task-their'}">${t.owner==='our'?'🔵 弊社':'🟣 相手'}</span>
+      <button onclick="deleteTask('${t.id}')" style="background:none;border:none;cursor:pointer;color:#ccc;font-size:12px;">✕</button>
+    </li>`).join('');
+  updateTaskProgress(c.id);
 }
 
-async function addCustomer(){
-  const co=document.getElementById('n-co').value.trim();
-  const nm=document.getElementById('n-nm').value.trim();
-  if(!co&&!nm){showToast('会社名または担当者名を入力してください');return;}
-  const {data,error}=await db.from('customers').insert({company:co||'未設定',name:nm||'未設定',area:areaSelections['n'].length?areaSelections['n']:null,title:document.getElementById('n-ti').value.trim(),email:document.getElementById('n-em').value.trim(),phone:document.getElementById('n-ph').value.trim(),status:document.getElementById('n-st').value,last_contact:document.getElementById('n-lc').value||null,next_action:document.getElementById('n-na').value||null,next_memo:document.getElementById('n-nm2').value.trim(),members:memberSelections['n'].length?memberSelections['n']:null}).select().single();
-  if(error){showToast('エラー: '+error.message);return;}
-  customers.unshift(data);renderCustomers();
-  document.getElementById('add-form').classList.remove('open');
-  ['n-co','n-nm','n-ti','n-em','n-ph','n-lc','n-na','n-nm2'].forEach(id=>document.getElementById(id).value='');
-  resetAreaPicker('n');
-  resetMemberSel('n');
-  document.getElementById('n-st').value='リード';
-  showToast('顧客を追加しました');
+async function toggleTask(id,done){
+  await db.from('cs_tasks').update({done}).eq('id',id);
+  const t=tasks.find(x=>x.id===id);if(t)t.done=done;
+  renderTaskPanel();renderClients();updateMetrics();
 }
 
+async function deleteTask(id){
+  await db.from('cs_tasks').delete().eq('id',id);
+  const idx=tasks.findIndex(x=>x.id===id);if(idx>=0)tasks.splice(idx,1);
+  renderTaskPanel();renderClients();updateMetrics();
+}
+
+async function addTask(){
+  const text=document.getElementById('new-task').value.trim();
+  if(!text)return;
+  const owner=document.getElementById('new-task-owner').value;
+  const c=clients[cidx];
+  const {data}=await db.from('cs_tasks').insert({client_id:c.id,company:c.name,text,owner,done:false}).select().single();
+  if(data)tasks.push(data);
+  document.getElementById('new-task').value='';
+  renderTaskPanel();renderClients();updateMetrics();
+}
+
+// タスクボード（全体）
+function setTaskFilter(f){
+  taskFilter=f;
+  ['all','our','their'].forEach(x=>{
+    const el=document.getElementById('tf-'+x);if(!el)return;
+    el.style.background=x===f?'#1a1a1a':'';
+    el.style.color=x===f?'#fff':'';
+    el.style.borderColor=x===f?'#1a1a1a':'';
+  });
+  renderTaskBoard();
+}
+
+function renderTaskBoard(){
+  const board=document.getElementById('task-board');if(!board)return;
+  let filtered=tasks.filter(t=>!t.done);
+  if(taskFilter==='our')filtered=filtered.filter(t=>t.owner==='our');
+  if(taskFilter==='their')filtered=filtered.filter(t=>t.owner==='their');
+  const grouped={};
+  filtered.forEach(t=>{
+    if(!grouped[t.client_id])grouped[t.client_id]={company:t.company,tasks:[]};
+    grouped[t.client_id].tasks.push(t);
+  });
+  if(!Object.keys(grouped).length){board.innerHTML='<p style="color:#888;font-size:13px;padding:12px 0;">未完了タスクはありません</p>';return;}
+  board.innerHTML=Object.values(grouped).map(g=>`
+    <div style="margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:8px;">${g.company}</div>
+      <ul class="checklist">${g.tasks.map(t=>`
+        <li>
+          <div class="check-circle ${t.owner==='our'?'our':''}" onclick="toggleTaskGlobal('${t.id}')"></div>
+          <span style="flex:1;">${t.text}</span>
+          <span class="task-owner ${t.owner==='our'?'task-our':'task-their'}">${t.owner==='our'?'🔵 弊社':'🟣 相手'}</span>
+        </li>`).join('')}
+      </ul>
+    </div>`).join('');
+}
+
+async function toggleTaskGlobal(id){
+  const t=tasks.find(x=>x.id===id);if(!t)return;
+  await db.from('cs_tasks').update({done:true}).eq('id',id);
+  t.done=true;renderTaskBoard();updateMetrics();renderClients();
+}
+
+// 担当者
+function renderContactPanel(){
+  const c=clients[cidx];
+  const ct=contacts.filter(x=>x.client_id===c.id);
+  const el=document.getElementById('contact-list');
+  if(!ct.length){el.innerHTML='<p style="color:#888;font-size:13px;padding:8px 0;">担当者がまだいません</p>';return;}
+  el.innerHTML=ct.map(x=>`<div class="contact-item">
+    <div class="contact-av">${ini(x.name)}</div>
+    <div style="flex:1;">
+      <div style="font-size:13px;font-weight:500;">${x.name}${x.title?'<span style="font-size:11px;color:#888;margin-left:6px;">'+x.title+'</span>':''}</div>
+      <div style="font-size:12px;color:#888;">${x.email||''}${x.phone?' · '+x.phone:''}</div>
+    </div>
+    ${x.email?`<button onclick="window.location.href='mailto:${x.email}'" class="btn btn-ghost btn-sm">メール</button>`:''}
+    <button onclick="deleteContact('${x.id}')" style="background:none;border:none;cursor:pointer;color:#ccc;font-size:12px;">✕</button>
+  </div>`).join('');
+}
+
+async function addContact(){
+  const name=document.getElementById('new-contact-name').value.trim();
+  if(!name){showToast('氏名を入力してください');return;}
+  const c=clients[cidx];
+  const {data}=await db.from('cs_contacts').insert({
+    client_id:c.id,company:c.name,name,
+    title:document.getElementById('new-contact-title').value.trim(),
+    email:document.getElementById('new-contact-email').value.trim(),
+    phone:document.getElementById('new-contact-phone').value.trim()
+  }).select().single();
+  if(data)contacts.push(data);
+  ['new-contact-name','new-contact-title','new-contact-email','new-contact-phone'].forEach(id=>document.getElementById(id).value='');
+  renderContactPanel();showToast('担当者を追加しました');
+}
+
+async function deleteContact(id){
+  await db.from('cs_contacts').delete().eq('id',id);
+  const idx=contacts.findIndex(x=>x.id===id);if(idx>=0)contacts.splice(idx,1);
+  renderContactPanel();
+}
+
+// 企業追加
 function toggleAdd(){
   document.getElementById('add-form').classList.toggle('open');
-  if(document.getElementById('add-form').classList.contains('open')){
-    buildMemberSel('n-member-sel','n');
-  }
+  if(document.getElementById('add-form').classList.contains('open'))buildMemberSel('n-member-sel','n');
 }
 
-async function genEmail(){
-  const c=customers[cidx];
-  const ago=dago(c.last_contact),diff=dft(c.next_action);
-  const type=document.getElementById('p-email-type').value;
-  const ctx=document.getElementById('p-email-ctx').value;
-  const btn=event.target;btn.disabled=true;btn.innerHTML='<span class="spin"></span>生成中...';
-  document.getElementById('p-email-out').style.display='block';
-  document.getElementById('p-email-txt').textContent='生成中...';
-  try{
-    document.getElementById('p-email-txt').textContent=await callAI(`営業メールを日本語で。\n種類: ${type}\n会社: ${c.company}（${c.area||''}）\n担当: ${c.name}${c.title?'（'+c.title+'）':''}\nステータス: ${c.status}\n最終アプローチ: ${ago!==null?ago+'日前':'未アプローチ'}\n次回: ${diff!==null?nl(diff,c.next_action)+(c.next_memo?' — '+c.next_memo:''):'未設定'}\n補足: ${ctx||'なし'}\n\n件名は「件名：〇〇」形式で、その後本文。`);
-  }catch(e){document.getElementById('p-email-txt').textContent='エラーが発生しました。';}
-  btn.disabled=false;btn.innerHTML='生成する ↗';
-}
-
-function openMail(){
-  const c=customers[cidx];
-  const body=document.getElementById('p-email-txt').textContent;
-  const m=body.match(/件名[：:]\s*(.+)/);
-  window.location.href=`mailto:${encodeURIComponent(c.email||'')}?subject=${encodeURIComponent(m?m[1].trim():'')}&body=${encodeURIComponent(body.replace(/件名[：:].*\n?/,'').trim())}`;
-}
-
-async function genScript(){
-  const c=customers[cidx];
-  const prod=document.getElementById('p-sc-prod').value||'弊社製品';
-  const scene=document.getElementById('p-sc-scene').value;
-  const obj=document.getElementById('p-sc-obj').value;
-  const btn=event.target;btn.disabled=true;btn.innerHTML='<span class="spin"></span>生成中...';
-  document.getElementById('p-sc-out').style.display='block';
-  document.getElementById('p-sc-txt').textContent='生成中...';
-  try{
-    document.getElementById('p-sc-txt').textContent=await callAI(`営業トークスクリプトを日本語で。\n商品: ${prod}\n顧客: ${c.name}（${c.company}・${c.area||''}・${c.title||'担当者'}）\nシーン: ${scene}\n懸念点: ${obj||'なし'}\n【営業担当】と【顧客】の会話形式で。`);
-  }catch(e){document.getElementById('p-sc-txt').textContent='エラーが発生しました。';}
-  btn.disabled=false;btn.innerHTML='生成する ↗';
-}
-
-async function genScriptTab(){
-  const prod=document.getElementById('sc-prod').value||'弊社製品';
-  const target=document.getElementById('sc-target').value||'顧客';
-  const scene=document.getElementById('sc-scene').value;
-  const obj=document.getElementById('sc-obj').value;
-  const btn=event.target;btn.disabled=true;btn.innerHTML='<span class="spin"></span>生成中...';
-  document.getElementById('sc-out').style.display='block';
-  document.getElementById('sc-txt').textContent='生成中...';
-  try{
-    document.getElementById('sc-txt').textContent=await callAI(`営業トークスクリプトを日本語で。\n商品: ${prod}\n顧客: ${target}\nシーン: ${scene}\n懸念点: ${obj||'なし'}\n【営業担当】と【顧客】の会話形式で。`);
-  }catch(e){document.getElementById('sc-txt').textContent='エラーが発生しました。';}
-  btn.disabled=false;btn.innerHTML='AIでスクリプト生成 ↗';
+async function addClient(){
+  const name=document.getElementById('n-co').value.trim();
+  if(!name){showToast('企業名を入力してください');return;}
+  const {data,error}=await db.from('cs_clients').insert({
+    name,status:document.getElementById('n-st').value,
+    next_mtg:document.getElementById('n-na').value||null,
+    next_mtg_memo:document.getElementById('n-nm').value.trim(),
+    sheet_url:document.getElementById('n-url').value.trim(),
+    members:memberSelections['n'].length?memberSelections['n']:null
+  }).select().single();
+  if(error){showToast('エラー: '+error.message);return;}
+  clients.unshift(data);renderClients();
+  document.getElementById('add-form').classList.remove('open');
+  ['n-co','n-na','n-nm','n-url'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('n-st').value='進行中';
+  resetMemberSel('n');showToast('企業を追加しました');
 }
 
 function switchTab(tab){
-  if(tab!=='customers')closeDetail();
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['customers','pipeline','post','memos','script'][i]===tab));
+  if(tab!=='clients')closeDetail();
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['clients','tasks','memos'][i]===tab));
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
-  if(tab==='post')renderPostBoard();
+  if(tab==='tasks')renderTaskBoard();
   if(tab==='memos'){renderMemos();updateMemoFilter();}
-  if(tab==='pipeline')renderPipeline();
-}
-
-function openMailDirect(){
-  const c = customers[cidx];
-  if(!c || !c.email){alert('メールアドレスが登録されていません');return;}
-  window.location.href = 'mailto:' + encodeURIComponent(c.email);
 }
 
 setSort('next');
