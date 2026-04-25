@@ -195,7 +195,7 @@ textarea{resize:vertical;min-height:72px;}
       <div class="ag">
         <div class="ab" id="ab-memo" onclick="togglePanel('memo')"><span class="ic">📝</span>商談メモ</div>
         <div class="ab" id="ab-post" onclick="togglePanel('post')"><span class="ic">✅</span>商談後タスク</div>
-        <div class="ab" id="ab-email" onclick="togglePanel('email')"><span class="ic">✉</span>メール生成</div>
+        
         <div class="ab" id="ab-script" onclick="togglePanel('script')"><span class="ic">💬</span>スクリプト</div>
         <div class="ab" onclick="markApproach()"><span class="ic">✓</span>アプローチ済み</div>
         <div class="ab" id="ab-next" onclick="togglePanel('next')"><span class="ic">📅</span>次回アクション</div>
@@ -261,18 +261,6 @@ textarea{resize:vertical;min-height:72px;}
           <div><label>内容</label><input type="text" id="p-next-memo" placeholder="例：デモ実施"></div>
         </div>
         <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="saveNext()">保存</button>
-      </div>
-      <div id="panel-email" style="display:none;" class="ss">
-        <div class="st">AIメール生成</div>
-        <label style="margin-top:0;">メールの種類</label>
-        <select id="p-email-type"><option>初回アプローチ</option><option>フォローアップ</option><option>提案書送付</option><option>クロージング</option><option>御礼メール</option><option>議事録共有</option></select>
-        <label>補足情報（任意）</label>
-        <textarea id="p-email-ctx" placeholder="商談内容、伝えたいポイントなど..."></textarea>
-        <button class="btn btn-primary" style="margin-top:10px;width:100%;" onclick="genEmail()">生成する ↗</button>
-        <div id="p-email-out" style="display:none;margin-top:12px;">
-          <div class="aio" id="p-email-txt"></div>
-          <button class="btn btn-ghost btn-sm" style="margin-top:8px;" onclick="openMail()">メーラーで開く</button>
-        </div>
       </div>
       <div id="panel-script" style="display:none;" class="ss">
         <div class="st">AIスクリプト生成</div>
