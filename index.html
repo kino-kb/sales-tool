@@ -202,7 +202,7 @@ textarea{resize:vertical;min-height:72px;}
       </div>
       <div id="view-info">
         <div class="ig">
-          <div class="ii"><div class="il">メール</div><div class="iv" id="d-em" style="font-size:12px;"></div></div>
+          <div class="ii"><div class="il">メール</div><div class="iv" id="d-em" style="font-size:12px;"></div><button class="btn btn-ghost btn-sm" style="margin-top:6px;font-size:11px;" onclick="openMailDirect()">メールを開く</button></div>
           <div class="ii"><div class="il">電話</div><div class="iv" id="d-ph"></div></div>
           <div class="ii"><div class="il">エリア</div><div class="iv" id="d-ar"></div></div>
           <div class="ii"><div class="il">ステータス</div><div class="iv" id="d-st"></div></div>
@@ -839,6 +839,12 @@ function switchTab(tab){
   if(tab==='post')renderPostBoard();
   if(tab==='memos'){renderMemos();updateMemoFilter();}
   if(tab==='pipeline')renderPipeline();
+}
+
+function openMailDirect(){
+  const c = customers[cidx];
+  if(!c || !c.email){alert('メールアドレスが登録されていません');return;}
+  window.location.href = 'mailto:' + encodeURIComponent(c.email);
 }
 
 setSort('next');
